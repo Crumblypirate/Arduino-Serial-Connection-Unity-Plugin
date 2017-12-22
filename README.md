@@ -8,11 +8,38 @@ DESCRIPTION
 An open source plugin for connecting an Arduino to Unity through a serial connection.
 This plugin provides an easy way to connect and interact with an Arduino from the Unity game engine.
 
+------------------------------------------------------------------------------------
+IMPORTANAT NOTES
+------------------------------------------------------------------------------------
+
+The connect function may only work if you hold a genuine Arduino board, In order to check this:
+
+1. Connect yoru Arduino to your computer
+2. Open device manager
+3. Expand "Ports (COM & LPT)"
+4. Select your arduino device from the list
+5. Right click on the device and select properties
+6. Click the "Details" tab
+7. Check the value when the "Device description" is selected
+
+If the Vlaue field does not contain the word Arduino, you will have to open the included dll source and find the 
+"SearchForArduino()" function and add the device description of your device in the following code:
+
+//search description for arduino name or CH340 (Arduino NANO) **Add to when more descriptions can be identified**
+if ((portDesc.find("Arduino") != std::string::npos) || (portDesc.find("CH340") != std::string::npos))
+  
+Simply add the following before the last ).
+
+|| (portDesc.find("NAME FROM YOUR DEVICE DESCRIPTION") != std::string::npos)
+
+REBUILD THE SOLUTION AND CONTINUE TO THE INSTALLATION.
+
+Detailed instructions with images can be found in the "Adding a Third party Arduino device to work with the plugin" section of the wiki.
 
 -----------------------------------------------------------------------------------
 INSTALLATION
 ------------------------------------------------------------------------------------
-To install the plugin to a unity project simply create a new folder in the unity assests folder
+To install the plugin to a unity project simply create a new folder in the unity assets folder
 called "Plugins". Then import the "Unity Arduino Plugin.ddl" into the plugins folder.
 
 In order to use the plugin in a unity script place the following code at the start of the script.
